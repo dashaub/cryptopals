@@ -84,20 +84,6 @@ for i in 0:10000
     @assert similarity(english_sample, eng_freq) < similarity(rand_text, eng_freq)
 end
 
-message = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
-
-struct Metrics
-   key::UInt8
-   loss::Real 
-   bigram_score::Real
-   trigram_score::Real
-   decrypted::String
-   
-   function Metrics(key, loss, bigram_score, trigram_score, decrypted)
-    new(key, loss, bigram_score, trigram_score, decrypted) 
-   end   
-end
-
 """
 Calculate the candidate solutions from a single xor cipher.
 """
@@ -119,7 +105,7 @@ function crack_single_xor(message::String)
         catch e
         end
     end
-    return sort(results, :loss)
+    return results#sort(results, :loss)
 end
 
-res = crack_single_xor(message)
+ciphertext = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
